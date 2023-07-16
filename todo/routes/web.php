@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\DB;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/todo', [\App\Http\Controllers\TodoController::class, 'index']);
+Route::get('/todo/create', [\App\Http\Controllers\TodoController::class, 'create']);
+Route::get('/todo/{id}', [\App\Http\Controllers\TodoController::class, 'find']);

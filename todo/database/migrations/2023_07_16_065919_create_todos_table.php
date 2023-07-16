@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('title')->default('Заголовка нет');
-            $table->string('description')->default('Описания нет');
+            $table->text('description')->default('Описания нет');
             $table->timestamps();
         });
     }

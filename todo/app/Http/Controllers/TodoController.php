@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Todo;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TodoController extends Controller
 {
@@ -14,6 +15,16 @@ class TodoController extends Controller
     public function index()
     {
         //
+        // return view('todo', [
+        //     'company' => 'my_company',
+        // ]);
+
+        // $todoBd = DB::table('todos')->get();
+        // return view('todo', ['todo' => $todoBd]);
+
+        $todo = DB::select('select * from todos');
+        return view('todo', ['todo' => $todo]);
+
     }
 
     /**
@@ -21,9 +32,21 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        Todo::create([
+            'title' => 'Заголовок 4',
+            'description' => 'Описание 4',
+        ]);
+        return redirect()->action(
+            [TodoController::class, 'index']
+          );
     }
 
+    public function find($id)
+    {
+        $findId = Todo::find($id);
+        return view('todoId', ['todoId' => $findId]);
+
+    }
     /**
      * Store a newly created resource in storage.
      */
